@@ -3,6 +3,9 @@ context = describe;
 
 function parseString(string){
     var result = string.toUpperCase();
+    if (result.charAt(result.length -1) == 'S') {
+        result = result.slice(0, -1);
+    }
     return [result];
 }
 
