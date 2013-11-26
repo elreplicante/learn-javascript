@@ -3,12 +3,12 @@ context = describe;
 
 var parser = function() {
 
-     cases = {
-            "Á": "A",
-            "É": "E",
-            "Í": "I",
-            "Ó": "O",
-            "Ú": "U"
+    cases = {
+        "Á": "A",
+        "É": "E",
+        "Í": "I",
+        "Ó": "O",
+        "Ú": "U"
         };
 
     articles = {
@@ -33,22 +33,23 @@ var parser = function() {
         return word;
     }
 
-
-
     var isPluralWord = function(word) {
         return word.charAt(word.length -1) == 'S';
     }
 
-    var parseString = function(string){
-        var result = string.toUpperCase();
-        result = result.split(" ");
-        result.forEach(function(element, index, array){
+    var truncateArticles = function(element, index, array){
             for (var item in articles) {
                 if (element == item) {
                     array.splice(index, 1);
                 }
             }
-        });
+        }
+
+    var parseString = function(string){
+        var result = string.toUpperCase();
+        result = result.split(" ");
+        result.forEach(truncateArticles);
+
         for (var i = 0; i < result.length; i++) {
             result[i] = sanitize(result[i], cases);
             result[i] = singularize(result[i]);
@@ -66,59 +67,63 @@ var parser = function() {
 
 describe("String parser", function(){
 
+    function parse(input) {
+        var testParser = parser;
+        return parser.parseString(input)
+    }
     beforeEach(function(){
     var testParser = parser;
 
     });
 
     it("converts lowercase string to uppercase", function(){
-        var result = parser.parseString("desarrollador");
+        var result = parse("desarrollador");
         expect(['DESARROLLADOR']).toEqual(result);
     });
 
     it("converts lowercase string to uppercase triangulating", function(){
-        var result = parser.parseString('informatico');
+        var result = parse('informatico');
         expect(['INFORMATICO']).toEqual(result);
     });
 
     it("slices the last 's' character from a word", function(){
-        var result = parser.parseString('INFORMATICOS');
+        var result = parse('INFORMATICOS');
         expect(['INFORMATICO']).toEqual(result);
     });
 
     it("replaces any 'tilde' character", function(){
-        var result = parser.parseString('INFORMÁTICO');
+        var result = parse('INFORMÁTICO');
         expect(['INFORMATICO']).toEqual(result);
     });
 
     it("replaces any 'tilde' character triangulating" ,function(){
-        var result = parser.parseString('CÓDIGO');
+        var result = parse('CÓDIGO');
         expect(['CODIGO']).toEqual(result);
     });
 
     it("replaces any 'tilde' character triangulating" ,function(){
-        var result = parser.parseString('BARDAJÍ');
+        var result = parse('BARDAJÍ');
         expect(['BARDAJI']).toEqual(result);
     });
 
     it("removes articles", function(){
-        var result = parser.parseString('EL INFORMATICO');
+        var result = parse('EL INFORMATICO');
         expect(['INFORMATICO']).toEqual(result);
     });
 
     it("removes articles triangulating", function(){
-        var result = parser.parseString('LA INFORMATICA');
+        var result = parse('LA INFORMATICA');
         expect(['INFORMATICA']).toEqual(result);
     });
 
     describe("when receiving more than one word", function(){
         it("puts all words as elements in an array", function(){
-            var result = parser.parseString('INFORMATICO PROGRAMADOR');
+            var result = parse('INFORMATICO PROGRAMADOR');
             expect(['INFORMATICO', 'PROGRAMADOR']).toEqual(result);
         });
 
         it("puts all words as elements of an array sanitized", function(){
-            var result = parser.parseString('INFORMATICOS PROGRAMADOR');
+            var result = parse('INFORMATICOS PROGRAMADOR');
             expect(['INFORMATICO', 'PROGRAMADOR']).toEqual(result);
         });
     });
