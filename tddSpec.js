@@ -51,5 +51,10 @@ describe("String parser", function(){
         expect(['CODIGO']).toEqual(result);
     });
 
+    it("replaces any 'tilde' character triangulating" ,function(){
+        var result = parseString('BARDAJÍ');
+        expect(['BARDAJI']).toEqual(result);
+    });
+
 });
 
