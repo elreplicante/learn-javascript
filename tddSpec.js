@@ -21,7 +21,7 @@ var parser = function() {
         for(var item in set) {
             result = result.replace(item, set[item]);
         }
-        
+
         return result;
     }
 
@@ -98,6 +98,13 @@ describe("String parser", function(){
     it("removes articles triangulating", function(){
         var result = parser.parseString('LA INFORMATICA');
         expect(['INFORMATICA']).toEqual(result);
+    });
+
+    describe("when receiving more than one word", function(){
+        it("puts all words as elements in an array", function(){
+            var result = parser.parseString('INFORMATICO PROGRAMADOR');
+            expect(['INFORMATICO', 'PROGRAMADOR']).toEqual(result);
+        })
     });
 
 });
