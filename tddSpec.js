@@ -1,11 +1,21 @@
 chai.should(); // invoking this function creates a "should" object on every object
 context = describe;
 
+function singularize (word) {
+    if (isPluralWord(word)) {
+        word = word.slice(0, -1);
+    }
+
+    return word;
+}
+
+function isPluralWord(word) {
+    return word.charAt(word.length -1) == 'S';
+}
+
 function parseString(string){
     var result = string.toUpperCase();
-    if (result.charAt(result.length -1) == 'S') {
-        result = result.slice(0, -1);
-    }
+    result = singularize(result);
     return [result];
 }
 
