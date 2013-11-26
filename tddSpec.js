@@ -11,12 +11,17 @@ var parser = function() {
             "Ú": "U"
         };
 
-    var replaceTildes = function (word){
-        var result = word;
-        for (var letter in cases){
-            result = result.replace(letter, cases[letter]);
-        }
+    articles = {
+        "EL ": "",
+        "LA ": ""
+    };
 
+    var sanitize = function(sentence, set) {
+        var result = sentence;
+        for(var item in set) {
+            result = result.replace(item, set[item]);
+        }
+        
         return result;
     }
 
@@ -34,11 +39,9 @@ var parser = function() {
 
     var parseString = function(string){
         var result = string.toUpperCase();
-        result = replaceTildes(result);
-        result = result.replace("EL ", "");
-        result = result.replace("LA ", "");
+        result = sanitize(result, articles);
+        result = sanitize(result, cases);
         result = singularize(result);
-        
         return [result];
     }
 
