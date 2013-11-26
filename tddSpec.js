@@ -91,5 +91,10 @@ describe("String parser", function(){
         expect(['INFORMATICO']).toEqual(result);
     });
 
+    it("removes articles triangulating", function(){
+        var result = parser.parseString('LA INFORMATICA');
+        expect(['INFORMATICA']).toEqual(result);
+    });
+
 });
 
