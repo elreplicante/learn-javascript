@@ -11,9 +11,10 @@ describe("String parser", function(){
         expect(['DESARROLLADOR']).toEqual(result);
     });
 
-    it("trims last 's' character from the words", function(){
-        var result = parseString("DESARROLLADORES");
-        expect(['DESARROLLADORE']).toEqual(result);
+    it("converts lowercase string to uppercase triangulating", function(){
+        var result = parseString('informatico')
+        expect(['INFORMATICO']).toEqual(result)
     });
+
 });
 
