@@ -13,8 +13,13 @@ describe("String parser", function(){
     });
 
     it("converts lowercase string to uppercase triangulating", function(){
-        var result = parseString('informatico')
-        expect(['INFORMATICO']).toEqual(result)
+        var result = parseString('informatico');
+        expect(['INFORMATICO']).toEqual(result);
+    });
+
+    it("slices the last 's' character from a word", function(){
+        var result = parseString('INFORMATICOS');
+        expect(['INFORMATICO']).toEqual(result);
     });
 
 });
