@@ -21,9 +21,9 @@ function isPluralWord(word) {
 }
 
 function replaceTildes(word){
-    return word.replace("Á", "A");
+    var result = word.replace("Ó", "O");
+    return result.replace("Á", "A");
 }
-
 
 describe("String parser", function(){
     it("converts lowercase string to uppercase", function(){
