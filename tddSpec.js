@@ -2,7 +2,8 @@ chai.should(); // invoking this function creates a "should" object on every obje
 context = describe;
 
 function parseString(string){
-    return ['DESARROLLADOR'];
+    var result = string.toUpperCase();
+    return [result];
 }
 
 describe("String parser", function(){
