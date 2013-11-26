@@ -21,8 +21,12 @@ function isPluralWord(word) {
 }
 
 function replaceTildes(word){
-    var result = word.replace("Ó", "O");
-    return result.replace("Á", "A");
+    var result = word;
+    var cases = {"Á":"A", "Ó":"O", "Í":"I"};
+    for (var letter in cases){
+        result = result.replace(letter, cases[letter]);
+    }
+    return result;
 }
 
 describe("String parser", function(){
