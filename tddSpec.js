@@ -34,8 +34,10 @@ var parser = function() {
 
     var parseString = function(string){
         var result = string.toUpperCase();
-        result = singularize(result);
         result = replaceTildes(result);
+        result = result.replace("EL ", "");
+        result = singularize(result);
+        
         return [result];
     }
 
@@ -51,7 +53,7 @@ describe("String parser", function(){
 
     beforeEach(function(){
     var testParser = parser;
-        
+
     });
 
     it("converts lowercase string to uppercase", function(){
@@ -86,7 +88,7 @@ describe("String parser", function(){
 
     it("removes articles", function(){
         var result = parser.parseString('EL INFORMATICO');
-        expect(['INFORMATICO']),toEqual(result);
+        expect(['INFORMATICO']).toEqual(result);
     });
 
 });
