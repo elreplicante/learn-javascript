@@ -12,8 +12,8 @@ var parser = function() {
         };
 
     articles = {
-        "EL ": "",
-        "LA ": ""
+        "EL": "",
+        "LA": ""
     };
 
     var sanitize = function(sentence, set) {
@@ -33,16 +33,27 @@ var parser = function() {
         return word;
     }
 
+
+
     var isPluralWord = function(word) {
         return word.charAt(word.length -1) == 'S';
     }
 
     var parseString = function(string){
         var result = string.toUpperCase();
-        result = sanitize(result, articles);
-        result = sanitize(result, cases);
-        result = singularize(result);
         result = result.split(" ");
+        result.forEach(function(element, index, array){
+            for (var item in articles) {
+                if (element == item) {
+                    array.splice(index, 1);
+                }
+            }
+        });
+        for (var i = 0; i < result.length; i++) {
+            result[i] = sanitize(result[i], cases);
+            result[i] = singularize(result[i]);
+        };
+
         return result;
     }
 
