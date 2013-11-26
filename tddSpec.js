@@ -41,11 +41,15 @@ describe("String parser", function(){
         expect(['INFORMATICO']).toEqual(result);
     });
 
-    it("slices any 'tilde' character", function(){
+    it("replaces any 'tilde' character", function(){
         var result = parseString('INFORMÁTICO');
         expect(['INFORMATICO']).toEqual(result);
     });
 
+    it("replaces any 'tilde' character triangulating" ,function(){
+        var result = parseString('CÓDIGO');
+        expect(['CODIGO']).toEqual(result);
+    });
 
 });
 
