@@ -36,6 +36,7 @@ var parser = function() {
         var result = string.toUpperCase();
         result = replaceTildes(result);
         result = result.replace("EL ", "");
+        result = result.replace("LA ", "");
         result = singularize(result);
         
         return [result];
