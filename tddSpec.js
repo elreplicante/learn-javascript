@@ -71,10 +71,6 @@ describe("String parser", function(){
         var testParser = parser;
         return parser.parseString(input)
     }
-    beforeEach(function(){
-    var testParser = parser;
-
-    });
 
     it("converts lowercase string to uppercase", function(){
         var result = parse("desarrollador");
