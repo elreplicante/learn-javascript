@@ -35,5 +35,10 @@ describe("String parser", function(){
         expect(['INFORMATICO']).toEqual(result);
     });
 
+    it("slices any 'tilde' character", function(){
+        var result = parseString('INFORMÁTICO');
+        expect(['INFORMATICO']).toEqual(result);
+    });
+
 });
 
