@@ -13,7 +13,8 @@ var parser = function() {
 
     articles = {
         "EL": "",
-        "LA": ""
+        "LA": "",
+        "LO": ""
     };
 
     var sanitize = function(sentence, set) {
@@ -49,7 +50,6 @@ var parser = function() {
         var result = string.toUpperCase();
         result = result.split(" ");
         result.forEach(truncateArticles);
-
         for (var i = 0; i < result.length; i++) {
             result[i] = sanitize(result[i], cases);
             result[i] = singularize(result[i]);
@@ -58,12 +58,9 @@ var parser = function() {
         return result;
     }
 
-    return {
-        parseString: parseString
-    };
+    return { parseString: parseString   };
 
 }();
-
 
 describe("String parser", function(){
 
@@ -123,6 +120,5 @@ describe("String parser", function(){
             expect(['INFORMATICO', 'PROGRAMADOR']).toEqual(result);
         });
     });
-
 });
 
