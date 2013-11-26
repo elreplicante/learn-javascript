@@ -104,7 +104,12 @@ describe("String parser", function(){
         it("puts all words as elements in an array", function(){
             var result = parser.parseString('INFORMATICO PROGRAMADOR');
             expect(['INFORMATICO', 'PROGRAMADOR']).toEqual(result);
-        })
+        });
+
+        it("puts all words as elements of an array sanitized", function(){
+            var result = parser.parseString('INFORMATICOS PROGRAMADOR');
+            expect(['INFORMATICO', 'PROGRAMADOR']).toEqual(result);
+        });
     });
 
 });
