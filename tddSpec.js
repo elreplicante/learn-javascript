@@ -42,9 +42,9 @@ var parser = function() {
         result = sanitize(result, articles);
         result = sanitize(result, cases);
         result = singularize(result);
-        return [result];
+        result = result.split(" ");
+        return result;
     }
-
 
     return {
         parseString: parseString
