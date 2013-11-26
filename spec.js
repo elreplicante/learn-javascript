@@ -394,8 +394,8 @@ describe("when using objects", function(){
             Child.prototype = new Parent(); // prototype chaining
 
             var child = new Child();
-            //expect(child.someMethod()).toEqual('...');
-            //expect(child.name).toEqual('...');
+            //expect(child.someMethod()).toEqual(10);
+            //expect(child.name).toEqual('child');
         });
 
         it("may use the functional inheritance", function(){

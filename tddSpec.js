@@ -10,5 +10,10 @@ describe("String parser", function(){
         var result = parseString("desarrollador");
         expect(['DESARROLLADOR']).toEqual(result);
     });
+
+    it("trims last 's' character from the words", function(){
+        var result = parseString("DESARROLLADORES");
+        expect(['DESARROLLADORE']).toEqual(result);
+    });
 });
 
