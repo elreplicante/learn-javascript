@@ -542,16 +542,19 @@ describe("event driven development", function(){
 
         lion.hunt();
 
-        //expect(called).toBe('...');
+        expect(called).toBe(true);
     });
 
     it("implements the observer pattern (one2many)", function(){
         function Publisher(){
-          this.addObserver = function(observerCallback){
-            // TODO: implement this 
+            var observers = [];
+            this.addObserver = function(observer){
+            observers.push(observer);
         };
         this.informAllObservers = function(){
-            // TODO: implement this
+           for (var i = 0; i < observers.length; i++) {
+               observers[i]();
+           };
         };
     }
 
@@ -565,8 +568,8 @@ describe("event driven development", function(){
 
     publisher.informAllObservers();
 
-        //expect(observer1WasCalled).toBeTruthy();    
-        //expect(observer2WasCalled).toBeTruthy();
+        expect(observer1WasCalled).toBeTruthy();    
+        expect(observer2WasCalled).toBeTruthy();
     });
 
     it("implements the pub/sub pattern (many2many)", function(){
@@ -580,7 +583,7 @@ describe("event driven development", function(){
 
         eventBus.emit("someEvent", {someNumber: 10});
 
-        //expect(eventWasFired).toBeFalsy();
+        expect(eventWasFired).toBeTruthy();
     }); 
 });
 
