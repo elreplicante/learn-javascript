@@ -4,8 +4,7 @@ context = describe;
 describe("String parser", function(){
 
     function parse(input) {
-        var testParser = parser;
-        return parser.parseString(input)
+        return superApp.parser.parseString(input)
     }
 
     it("converts lowercase string to uppercase", function(){
@@ -60,4 +59,50 @@ describe("String parser", function(){
         });
     });
 });
+
+
+describe("Interaction betwwen modules", function(){
+
+    beforeEach(function() {
+        gui = superApp.guiComponent();
+        client = superApp.clientProxy(superApp.parser);
+        var interactor = superApp.createInteractor(gui, client);
+    });
+
+    it("ask server for results when user clicks", function(){
+        gui.searchBox = {};
+
+        gui.searchBox.text = function(){
+            return "DESARROLLADOR";
+        }
+
+        var wasInvoked = false;
+        var passedArg = null;
+        client.doSearch = function(arg1) {
+            wasInvoked = true;
+            passedArg = arg1;
+        }
+
+        gui.onClick();
+
+        expect(wasInvoked).toBeTruthy();
+        expect(passedArg).toEqual('DESARROLLADOR');
+    });
+
+    it("checks client to call search", function(){   
+        gui.searchBox = {};
+
+        gui.searchBox.text = function(){
+            return "DESARROLLADOR";
+        }
+
+        spyOn(client, 'doSearch');
+        gui.onClick();
+
+        expect(client.doSearch).toHaveBeenCalledWith('DESARROLLADOR');
+
+    });
+});
+
+
 
